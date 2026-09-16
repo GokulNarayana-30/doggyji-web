@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doggy Ji Companion App — Official Product Showcase & Interactive Simulator</title>
+  
+  <!-- Doggyji Brand Fonts (Nunito + Montserrat) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom Brand Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Animated Lighting -->
+  <div class="ambient-glow glow-teal"></div>
+  <div class="ambient-glow glow-purple"></div>
+  <div class="ambient-glow glow-amber"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <div class="brand-logo-badge">🐶</div>
+      <div class="brand-text">
+        <span class="brand-name">Doggy Ji</span>
+        <span class="brand-tag">Companion Platform</span>
+      </div>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#simulator" class="nav-link">Live App Simulator</a>
+      <a href="#analytics" class="nav-link">Market & Metrics</a>
+      <a href="#features" class="nav-link">The 7 Pillars</a>
+      <a href="#journeys" class="nav-link">User Experiences</a>
+      <a href="#calculator" class="nav-link">Earnings Simulator</a>
+      <a href="#screens" class="nav-link">Screen Directory</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" id="themeToggle">☀️ Light</button>
+      <a href="#simulator" class="btn-cta nav-cta-desktop">Simulator 📱</a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Interactive Phone Simulator -->
+  <header class="container hero-wrapper" id="overview">
+    <!-- Left Column: Story & Vision -->
+    <div class="hero-content">
+      <div class="brand-badge-pill">
+        <div class="live-pulse"></div>
+        <span>India's All-in-One Pet Wellness & Services Platform</span>
+      </div>
+
+      <h1 class="hero-title">
+        The Super-App for <br>
+        <span class="gradient-teal">Pet Parents & Care Partners</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        <strong>Doggy Ji Companion</strong> merges natural, 100% wholesome pet nutrition with everyday pet care essentials: on-demand dog walking, India's first emergency blood bank lifeline, and a verified pet services marketplace.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#simulator" class="btn-cta">📱 Try Live App Simulator</a>
+        <a href="#calculator" class="btn-purple">💼 Provider Earnings Calculator</a>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div class="metrics-strip">
+        <div class="metric-pill">
+          <div class="metric-val">25+</div>
+          <div class="metric-lbl">Production Screens</div>
+        </div>
+        <div class="metric-pill">
+          <div class="metric-val">7</div>
+          <div class="metric-lbl">Core Modules</div>
+        </div>
+        <div class="metric-pill">
+          <div class="metric-val">2-in-1</div>
+          <div class="metric-lbl">Parent & Provider Mode</div>
+        </div>
+        <div class="metric-pill">
+          <div class="metric-val">60-120</div>
+          <div class="metric-lbl">FPS Native Speed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Smartphone Device Simulator -->
+    <div class="phone-simulator-container" id="simulator">
+      <!-- Floating Interactive Badges -->
+      <div class="float-pill float-pill-1">
+        <span>🐾</span>
+        <div>
+          <div style="font-size: 0.72rem; color: var(--doggy-amber);">NEW REQUEST</div>
+          <div>Bruno's 45-min Walk • ₹300</div>
+        </div>
+      </div>
+
+      <div class="float-pill float-pill-2">
+        <span>🩸</span>
+        <div>
+          <div style="font-size: 0.72rem; color: #E53935;">SOS BLOOD LIFELINE</div>
+          <div>Matched Donor 2.4 km away!</div>
+        </div>
+      </div>
+
+      <!-- Switcher Bar for Phone Views -->
+      <div class="sim-tabs-bar">
+        <button class="sim-tab-btn active" data-sim="simHome">🏠 Home</button>
+        <button class="sim-tab-btn" data-sim="simStore">🛒 Store</button>
+        <button class="sim-tab-btn" data-sim="simServices">🐾 Services</button>
+        <button class="sim-tab-btn" data-sim="simBlood">🩸 SOS</button>
+        <button class="sim-tab-btn" data-sim="simProvider">💼 Dashboard</button>
+      </div>
+
+      <!-- Physical Phone Frame -->
+      <div class="phone-case">
+        <div class="phone-notch">
+          <div class="camera-dot"></div>
+        </div>
+
+        <div class="phone-screen">
+          <!-- 1. Home Feed View -->
+          <div class="sim-view active" id="simHome">
+            <div class="sim-card" style="background: linear-gradient(135deg, rgba(35, 193, 195, 0.25), rgba(0, 150, 136, 0.15)); border-color: rgba(35, 193, 195, 0.4);">
+              <div class="sim-card-header">
+                <span style="font-size: 0.75rem; font-weight: 800; color: var(--doggy-teal);">WELCOME BACK</span>
+                <span class="sim-badge amber">🔥 7 DAY STREAK</span>
+              </div>
+              <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.1rem;">Priya & Bruno 🐶</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Golden Retriever • 2.5 yrs old</div>
+            </div>
+
+            <!-- Feeding Reminder Widget -->
+            <div class="sim-card">
+              <div class="sim-card-header">
+                <span style="font-size: 0.75rem; font-weight: 700;">DAILY FEEDING GOAL</span>
+                <span style="font-size: 0.75rem; color: var(--doggy-teal); font-weight: 800;">380g / 400g</span>
+              </div>
+              <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                <div style="width: 90%; height: 100%; background: var(--doggy-teal); border-radius: 3px;"></div>
+              </div>
+            </div>
+
+            <!-- Quick Reorder Card -->
+            <div class="sim-card">
+              <div style="font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem;">Quick Reorder Favorite</div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span style="font-size: 1.8rem;">🍗</span>
+                <div style="flex: 1;">
+                  <div style="font-size: 0.8rem; font-weight: 700;">Air-Dried Chicken Jerky</div>
+                  <div style="font-size: 0.7rem; color: var(--text-muted);">100% Single Ingredient</div>
+                </div>
+                <button class="btn-cta" style="padding: 4px 10px; font-size: 0.75rem;" id="simReorderBtn">Reorder ₹349</button>
+              </div>
+            </div>
+
+            <!-- Pet Services Mini Banner -->
+            <div class="sim-card" style="background: linear-gradient(135deg, rgba(123, 31, 162, 0.2), rgba(156, 39, 176, 0.1)); border-color: rgba(123, 31, 162, 0.3);">
+              <div class="sim-card-header">
+                <span style="font-size: 0.8rem; font-weight: 800; color: #BA68C8;">🐾 LOCAL PET SERVICES</span>
+                <span class="sim-badge purple">NEW</span>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Need a dog walker or sitter while you are at work?</div>
+            </div>
+          </div>
+
+          <!-- 2. Nutrition Store View -->
+          <div class="sim-view" id="simStore">
+            <div style="display: flex; gap: 4px; overflow-x: auto; padding-bottom: 4px;">
+              <span class="sim-badge teal" style="background: var(--doggy-teal); color: white;">All</span>
+              <span class="sim-badge" style="background: var(--bg-card); color: var(--text-muted);">Treats</span>
+              <span class="sim-badge" style="background: var(--bg-card); color: var(--text-muted);">Chews</span>
+              <span class="sim-badge" style="background: var(--bg-card); color: var(--text-muted);">Air-Dried</span>
+            </div>
+
+            <!-- Product 1 -->
+            <div class="sim-card">
+              <div style="display: flex; gap: 10px;">
+                <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">🍖</div>
+                <div style="flex: 1;">
+                  <div style="font-weight: 700; font-size: 0.85rem;">Lamb Crunchies (150g)</div>
+                  <div style="font-size: 0.7rem; color: var(--doggy-teal); font-weight: 800;">₹449 <span style="text-decoration: line-through; color: var(--text-dim); font-size: 0.65rem;">₹520</span></div>
+                  <div style="font-size: 0.68rem; color: var(--text-muted);">Rich in Iron & Omega 3</div>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--border-color);">
+                <span style="font-size: 0.7rem; color: var(--doggy-amber); font-weight: 700;">🔄 Auto-Deliver (Save 15%)</span>
+                <button class="btn-cta" style="padding: 3px 8px; font-size: 0.7rem;">Add +</button>
+              </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="sim-card">
+              <div style="display: flex; gap: 10px;">
+                <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">🐟</div>
+                <div style="flex: 1;">
+                  <div style="font-weight: 700; font-size: 0.85rem;">Salmon Skin Dental Chews</div>
+                  <div style="font-size: 0.7rem; color: var(--doggy-teal); font-weight: 800;">₹399</div>
+                  <div style="font-size: 0.68rem; color: var(--text-muted);">Cleans Tartar Naturally</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Pet Services View -->
+          <div class="sim-view" id="simServices">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.95rem;">Verified Care in Koramangala</div>
+            
+            <!-- Provider Card 1 -->
+            <div class="sim-card">
+              <div style="display: flex; gap: 8px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: #23C1C3; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🚶</div>
+                <div style="flex: 1;">
+                  <div style="display: flex; align-items: center; gap: 4px;">
+                    <span style="font-weight: 700; font-size: 0.82rem;">Aditya Rao</span>
+                    <span style="color: #23C1C3; font-size: 0.75rem;">✓</span>
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--text-muted);">Dog Walker • 312 completed</div>
+                  <div style="font-size: 0.72rem; color: var(--doggy-amber); font-weight: 800;">★ 4.9 (84 reviews)</div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--doggy-teal);">₹200</div>
+                  <div style="font-size: 0.65rem; color: var(--text-dim);">/ 45 min</div>
+                </div>
+              </div>
+              <button class="btn-cta" style="padding: 4px; font-size: 0.75rem; width: 100%; margin-top: 4px;">Instant Book for Bruno</button>
+            </div>
+
+            <!-- Provider Card 2 -->
+            <div class="sim-card">
+              <div style="display: flex; gap: 8px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: #7B1FA2; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🎓</div>
+                <div style="flex: 1;">
+                  <div style="display: flex; align-items: center; gap: 4px;">
+                    <span style="font-weight: 700; font-size: 0.82rem;">Karan Mehta</span>
+                    <span style="color: #7B1FA2; font-size: 0.75rem;">✓</span>
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--text-muted);">Canine Behaviorist</div>
+                  <div style="font-size: 0.72rem; color: var(--doggy-amber); font-weight: 800;">★ 4.8 (124 reviews)</div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--doggy-teal);">₹800</div>
+                  <div style="font-size: 0.65rem; color: var(--text-dim);">/ session</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. SOS Blood Bank View -->
+          <div class="sim-view" id="simBlood">
+            <div class="sim-card" style="background: rgba(229, 57, 53, 0.15); border-color: rgba(229, 57, 53, 0.4);">
+              <div class="sim-card-header">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #EF5350;">🚨 CRITICAL SOS ALERT</span>
+                <span class="sim-badge red">URGENT</span>
+              </div>
+              <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.9rem;">DEA 1.1 Blood Needed</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted);">Cessna Pet Hospital, Domlur • Patient: Max (Labrador, Tick Fever)</div>
+              <button style="background: #E53935; color: white; border: none; padding: 6px; border-radius: 8px; font-weight: 800; font-size: 0.75rem; margin-top: 4px; cursor: pointer;">Connect With Donor Parent</button>
+            </div>
+
+            <!-- Donor Registered -->
+            <div class="sim-card">
+              <div class="sim-card-header">
+                <span style="font-size: 0.75rem; font-weight: 700;">VOLUNTEER DONORS NEARBY</span>
+                <span style="font-size: 0.7rem; color: var(--doggy-teal); font-weight: 700;">14 Registered</span>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span style="font-size: 1.4rem;">🐕</span>
+                <div style="flex: 1;">
+                  <div style="font-size: 0.78rem; font-weight: 700;">Simba (German Shepherd, 32kg)</div>
+                  <div style="font-size: 0.68rem; color: var(--text-muted);">DEA 1.1 Negative • Koramangala (2.4 km)</div>
+                </div>
+                <span class="sim-badge green">AVAILABLE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Provider Dashboard View (REACTIVE DEMO) -->
+          <div class="sim-view" id="simProvider">
+            <div class="sim-card" style="background: linear-gradient(135deg, #6A1B9A, #8E24AA); color: white;">
+              <div class="sim-card-header">
+                <div style="font-weight: 800; font-size: 0.85rem;">Priya Sharma (Walker)</div>
+                <span class="sim-badge" style="background: rgba(255,255,255,0.2); color: white;">PRO</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                <span style="font-size: 0.72rem;" id="simStatusText">🟢 Accepting Bookings</span>
+                <button style="background: white; color: #6A1B9A; border: none; padding: 3px 8px; border-radius: 10px; font-size: 0.65rem; font-weight: 800; cursor: pointer;" id="simToggleOnlineBtn">Switch</button>
+              </div>
+            </div>
+
+            <!-- Metrics inside simulator -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+              <div class="sim-card" style="padding: 8px;">
+                <div style="font-size: 0.65rem; color: var(--text-muted);">THIS WEEK</div>
+                <div style="font-size: 1.1rem; font-weight: 800; color: var(--doggy-teal);">₹4,850</div>
+              </div>
+              <div class="sim-card" style="padding: 8px;">
+                <div style="font-size: 0.65rem; color: var(--text-muted);">COMPLETED</div>
+                <div style="font-size: 1.1rem; font-weight: 800; color: #BA68C8;">14 Jobs</div>
+              </div>
+            </div>
+
+            <!-- Interactive Request Card -->
+            <div class="sim-card" id="simBookingCard">
+              <div class="sim-card-header">
+                <span style="font-size: 0.72rem; font-weight: 800; color: var(--doggy-amber);">NEW CLIENT REQUEST</span>
+                <span style="font-size: 0.75rem; font-weight: 800; color: var(--doggy-teal);">₹300</span>
+              </div>
+              <div style="font-size: 0.78rem; font-weight: 700;">Rahul Sharma • Bruno (Golden)</div>
+              <div style="font-size: 0.68rem; color: var(--text-muted);">45-min Walk • Today, 5:30 PM</div>
+              <div style="display: flex; gap: 6px; margin-top: 6px;">
+                <button style="flex: 1; background: #23C1C3; color: white; border: none; padding: 5px; border-radius: 6px; font-weight: 800; font-size: 0.72rem; cursor: pointer;" id="simAcceptBtn">Accept</button>
+                <button style="flex: 1; background: rgba(255,255,255,0.08); color: var(--text-muted); border: none; padding: 5px; border-radius: 6px; font-weight: 700; font-size: 0.72rem; cursor: pointer;" id="simDeclineBtn">Decline</button>
+              </div>
+            </div>
+            <div id="simFeedbackMsg" style="display: none; font-size: 0.75rem; color: #4CAF50; font-weight: 700; text-align: center;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Charts & Analytics Section -->
+  <section class="section container" id="analytics">
+    <div class="section-head">
+      <span class="section-tag">Business & Engagement Engine</span>
+      <h2 class="section-title">The Pet Care Retention Flywheel</h2>
+      <p class="section-desc">Why combine pet nutrition with emergency health and local gig services? See the numbers behind our high daily engagement.</p>
+    </div>
+
+    <div class="charts-grid">
+      <!-- Radar Chart: Feature Depth -->
+      <div class="chart-box">
+        <div class="chart-head">
+          <h3>Platform Maturity Radar</h3>
+          <span class="sim-badge teal" style="background: rgba(35,193,195,0.15); color: var(--doggy-teal);">7 PILLARS</span>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Bar Chart: Provider Revenue -->
+      <div class="chart-box">
+        <div class="chart-head">
+          <h3>Partner Income Potential</h3>
+          <span class="sim-badge purple" style="background: rgba(123,31,162,0.15); color: var(--doggy-purple-light);">GIG REVENUE</span>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Doughnut Chart: Retention -->
+      <div class="chart-box">
+        <div class="chart-head">
+          <h3>Weekly User Retention</h3>
+          <span class="sim-badge amber" style="background: rgba(254,187,74,0.15); color: var(--doggy-amber);">USAGE FLYWHEEL</span>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="doughnutChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The 7 Core Modules -->
+  <section class="section container" id="features">
+    <div class="section-head">
+      <span class="section-tag">Comprehensive Platform</span>
+      <h2 class="section-title">The 7 Pillars of Doggy Ji</h2>
+      <p class="section-desc">Designed with rich visuals, intuitive micro-animations, and complete customer journeys.</p>
+    </div>
+
+    <!-- Filter Pills Row -->
+    <div class="filter-pills-row">
+      <button class="filter-btn active" data-filter="all">All Modules</button>
+      <button class="filter-btn" data-filter="parent">Pet Parent Care</button>
+      <button class="filter-btn" data-filter="services">Services & Provider</button>
+      <button class="filter-btn" data-filter="health">Health & Emergency</button>
+    </div>
+
+    <div class="cards-grid">
+      <!-- 1. E-Commerce & Subscriptions -->
+      <div class="module-card" data-cat="parent">
+        <div class="card-icon-bubble">
+          <span>🛒</span>
+        </div>
+        <h3>Pet Nutrition & Auto-Delivery Store</h3>
+        <p>A modern e-commerce storefront for Doggyji’s air-dried food, natural single-ingredient treats, and flexible repeat delivery boxes.</p>
+        <ul class="card-bullets">
+          <li><span class="check">✓</span> <strong>Smart Category Browsing:</strong> Dog treats, dental chews, feline delights, and puppy meal boxes.</li>
+          <li><span class="check">✓</span> <strong>Auto-Delivery (Save 15%):</strong> Recurring auto-orders every 2, 3, or 4 weeks with instant pause.</li>
+          <li><span class="check">✓</span> <strong>Ingredient Breakdown:</strong> 100% human-grade, preservative-free transparency with feeding guidance.</li>
+          <li><span class="check">✓</span> <strong>Instant Reorder:</strong> Re-purchase your pet's favorite treat in 1 tap directly from the home feed.</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag-badge">Save 15%</span>
+          <span class="tag-badge">Auto-Delivery</span>
+          <span class="tag-badge">Single Ingredient</span>
+        </div>
+      </div>
+
+      <!-- 2. Pet Services Marketplace -->
+      <div class="module-card" data-cat="services">
+        <div class="card-icon-bubble card-icon-purple">
+          <span>💼</span>
+        </div>
+        <h3>Local Pet Services Marketplace</h3>
+        <p>An on-demand local pet care network (PetBacker & Rover model) connecting pet parents with verified sitters, walkers, and trainers.</p>
+        <ul class="card-bullets">
+          <li><span class="check">✓</span> <strong>6 Specialized Services:</strong> Dog Walkers, Pet Sitters, Home Boarding, Daycare, Groomers, and Trainers.</li>
+          <li><span class="check">✓</span> <strong>City & Area Discovery:</strong> Filter available professionals by neighborhood with transparent starting prices.</li>
+          <li><span class="check">✓</span> <strong>Verified Pro Badges:</strong> Government ID Verified, Pro Status, and First-Aid Certified credentials.</li>
+          <li><span class="check">✓</span> <strong>2-Tap Instant Booking:</strong> Select your pet, choose date & time, add special handling notes, and confirm.</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag-badge">Dog Walkers</span>
+          <span class="tag-badge">Pet Sitters</span>
+          <span class="tag-badge">Home Boarding</span>
+        </div>
+      </div>
+
+      <!-- 3. Provider Portal & Dashboard -->
+      <div class="module-card" data-cat="services">
+        <div class="card-icon-bubble card-icon-purple">
+          <span>📊</span>
+        </div>
+        <h3>Care Provider Partner Dashboard</h3>
+        <p>A specialized business cockpit empowering dog lovers and trainers to run their independent pet care business with transparent weekly revenue.</p>
+        <ul class="card-bullets">
+          <li><span class="check">✓</span> <strong>5-Step Easy Onboarding:</strong> Register bio, services offered, custom pricing rates, and ID verification.</li>
+          <li><span class="check">✓</span> <strong>Pet Safety Quiz Certification:</strong> Mandatory 5-question safety test ensures only qualified carers join.</li>
+          <li><span class="check">✓</span> <strong>Online / Offline Availability Toggle:</strong> Switch live anytime to start or pause receiving booking requests.</li>
+          <li><span class="check">✓</span> <strong>Instant Request Manager:</strong> Review pet details and location with 1-tap <em>Accept / Decline</em> actions.</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag-badge">Earn ₹20k–₹50k/mo</span>
+          <span class="tag-badge">Live Toggle</span>
+          <span class="tag-badge">Weekly UPI Payouts</span>
+        </div>
+      </div>
+
+      <!-- 4. SOS Blood Bank Lifeline -->
+      <div class="module-card" data-cat="health">
+        <div class="card-icon-bubble card-icon-red">
+          <span>🩸</span>
+        </div>
+        <h3>SOS Emergency Blood Bank Lifeline</h3>
+        <p>India’s first community pet blood donor network, connecting critical pet emergencies with registered, volunteer donor pets in minutes.</p>
+        <ul class="card-bullets">
+          <li><span class="check">✓</span> <strong>Urgent Red Alert Banner:</strong> Pulsing SOS banner broadcasting verified emergencies across the city.</li>
+          <li><span class="check">✓</span> <strong>Canine & Feline Blood Types:</strong> Filter donors by DEA 1.1 Positive/Negative and location radius.</li>
+          <li><span class="check">✓</span> <strong>Volunteer Donor Registry:</strong> Pet parents register their healthy, vaccinated pets to save lives.</li>
+          <li><span class="check">✓</span> <strong>Direct Hospital Connect:</strong> Quick phone and chat links to coordinating doctors and donor parents.</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag-badge">Emergency SOS</span>
+          <span class="tag-badge">Canine Blood Types</span>
+          <span class="tag-badge">Donor Network</span>
+        </div>
+      </div>
+
+      <!-- 5. Pet Health Diary & Feeding Calculator -->
+      <div class="module-card" data-cat="health">
+        <div class="card-icon-bubble">
+          <span>📋</span>
+        </div>
+        <h3>Pet Health Passport & Feeding Calculator</h3>
+        <p>A centralized digital health record ensuring timely vaccinations, medical adherence, and breed-accurate daily caloric intake.</p>
+        <ul class="card-bullets">
+          <li><span class="check">✓</span> <strong>Multi-Pet Passport:</strong> Breed, age, weight, microchip number, and medical allergy records.</li>
+          <li><span class="check">✓</span> <strong>Booster Schedule Countdown:</strong> Automatic reminders for Rabies, DHPP, and anti-flea treatments.</li>
+          <li><span class="check">✓</span> <strong>Scientific Calorie Calculator:</strong> Accurate daily feeding grams customized to age, weight, and activity.</li>
+          <li><span class="check">✓</span> <strong>Weight Milestone Chart:</strong> Track your pet's growth curve to prevent obesity or sudden weight drop.</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag-badge">Vaccine Tracker</span>
+          <span class="tag-badge">Calorie Calculator</span>
+          <span class="tag-badge">Medical Vault</span>
+        </div>
+      </div>
+
+      <!-- 6. Pet Match & Community -->
+      <div class="module-card" data-cat="parent">
+        <div class="card-icon-bubble card-icon-amber">
+          <span>🐾</span>
+        </div>
+        <h3>Pet Match & Neighborhood Playdates</h3>
+        <p>A playful discovery network helping dogs and cats find compatible walking buddies and playdate partners in their neighborhood.</p>
+        <ul class="card-bullets">
+          <li><span class="check">✓</span> <strong>Swipe Discovery Cards:</strong> Browse nearby pets with photos, temperament, and favorite play styles.</li>
+          <li><span class="check">✓</span> <strong>Compatibility Matching:</strong> Filter by energy level (chill, playful, hyperactive) and distance.</li>
+          <li><span class="check">✓</span> <strong>Confirmed Match List:</strong> Track mutual playdate friends and planned weekend walks.</li>
+          <li><span class="check">✓</span> <strong>Direct In-App Chat:</strong> Message verified pet parents directly to coordinate park meetups.</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag-badge">Swipe Discovery</span>
+          <span class="tag-badge">Playdate Match</span>
+          <span class="tag-badge">In-App Chat</span>
+        </div>
+      </div>
+
+      <!-- 7. Paw Points Loyalty -->
+      <div class="module-card" data-cat="parent">
+        <div class="card-icon-bubble card-icon-amber">
+          <span>🪙</span>
+        </div>
+        <h3>Gamified Paw Points Loyalty Club</h3>
+        <p>Rewarding everyday engagement with redeemable Paw Points, encouraging daily check-ins and community participation.</p>
+        <ul class="card-bullets">
+          <li><span class="check">✓</span> <strong>Daily Streak Rewards:</strong> Earn coins every morning you log in and check pet reminders.</li>
+          <li><span class="check">✓</span> <strong>Milestone Bonuses:</strong> Extra points for logging vaccines, writing reviews, or booking services.</li>
+          <li><span class="check">✓</span> <strong>Treat Redemption Catalog:</strong> Cash in coins for 100% free treats, delivery waivers, or charity donations.</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag-badge">Daily Streaks</span>
+          <span class="tag-badge">Free Treats</span>
+          <span class="tag-badge">Paw Points</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Dual-Sided User Journeys -->
+  <section class="section container" id="journeys">
+    <div class="section-head">
+      <span class="section-tag">End-to-End User Experience</span>
+      <h2 class="section-title">How the App Works in Practice</h2>
+      <p class="section-desc">Toggle between the Pet Parent flow and the Care Provider flow to see the full experience.</p>
+    </div>
+
+    <div class="journey-wrapper">
+      <div class="journey-tab-nav">
+        <button class="journey-btn active" id="tabParent">🐶 Pet Parent Journey</button>
+        <button class="journey-btn purple-btn" id="tabProvider">💼 Care Provider Journey</button>
+      </div>
+
+      <!-- Flow 1: Pet Parent -->
+      <div class="journey-grid" id="flowParent">
+        <div class="journey-card">
+          <div class="step-num-circle">1</div>
+          <h4>Discover & Shop</h4>
+          <p>Parent opens app. Reorders favorite air-dried treats, reviews daily feeding goals, or taps "Pet Services".</p>
+        </div>
+        <div class="journey-card">
+          <div class="step-num-circle">2</div>
+          <h4>Find Verified Pro</h4>
+          <p>Browses local walkers or sitters, reviews ratings, badges (Verified Pro), background checks, and past reviews.</p>
+        </div>
+        <div class="journey-card">
+          <div class="step-num-circle">3</div>
+          <h4>Instant 2-Tap Booking</h4>
+          <p>Selects saved pet, picks time slot, adds custom leash/feeding instructions, and completes transparent booking.</p>
+        </div>
+        <div class="journey-card">
+          <div class="step-num-circle">4</div>
+          <h4>Live Updates & Coins</h4>
+          <p>Receives photo updates during the walk via chat, leaves a review, and earns Paw Points for free treats.</p>
+        </div>
+      </div>
+
+      <!-- Flow 2: Service Provider -->
+      <div class="journey-grid" id="flowProvider" style="display: none;">
+        <div class="journey-card purple">
+          <div class="step-num-circle">1</div>
+          <h4>Become a Partner</h4>
+          <p>Taps "Become a Provider". Views transparent monthly earning potential (₹15,000–₹50,000/mo) and partner perks.</p>
+        </div>
+        <div class="journey-card purple">
+          <div class="step-num-circle">2</div>
+          <h4>5-Step Onboarding</h4>
+          <p>Submits experience, service rates, pet capacity, and identity proof for professional background verification.</p>
+        </div>
+        <div class="journey-card purple">
+          <div class="step-num-circle">3</div>
+          <h4>Safety Quiz Gate</h4>
+          <p>Passes the 5-question Pet Safety & First Aid test (80% passing gate) ensuring certified quality care standards.</p>
+        </div>
+        <div class="journey-card purple">
+          <div class="step-num-circle">4</div>
+          <h4>Live Dashboard</h4>
+          <p>Toggles Online/Offline status, accepts client bookings, coordinates walks, and receives weekly direct payouts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Monthly Earnings Calculator -->
+  <section class="section container" id="calculator">
+    <div class="section-head">
+      <span class="section-tag">Partner Economics</span>
+      <h2 class="section-title">Provider Earnings Calculator</h2>
+      <p class="section-desc">Interactive revenue simulator for pet lovers, dog walkers, sitters, and trainers.</p>
+    </div>
+
+    <div class="calc-box">
+      <div>
+        <label for="serviceSelect" class="calc-label">Choose Service Category:</label>
+        <select id="serviceSelect" class="calc-select-input">
+          <option value="walker">Dog Walker (Avg. ₹250 / 45-min walk)</option>
+          <option value="sitter">Pet Sitter (Avg. ₹500 / session)</option>
+          <option value="boarding">Home Boarding (Avg. ₹800 / day)</option>
+          <option value="trainer">Pet Behavior Trainer (Avg. ₹750 / hr)</option>
+          <option value="groomer">Pet Groomer (Avg. ₹600 / session)</option>
+        </select>
+
+        <label for="hoursRange" class="calc-label">Weekly Commitment: <span id="hoursValue" style="color: var(--doggy-teal);">20 hrs / week</span></label>
+        <input type="range" id="hoursRange" class="calc-slider" min="5" max="40" step="5" value="20">
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+          *Estimates based on current customer rates across metro cities (Bengaluru, Mumbai, Delhi-NCR). Top providers with Verified Pro badges earn up to 35% higher.
+        </p>
+      </div>
+
+      <div class="calc-output-card">
+        <span style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
+          Estimated Monthly Revenue
+        </span>
+        <div class="calc-money-number" id="calcOutput">₹20,000</div>
+        <span style="display: inline-block; padding: 5px 14px; border-radius: var(--radius-pill); background: rgba(35, 193, 195, 0.15); color: var(--doggy-teal); font-size: 0.85rem; font-weight: 800;">
+          Direct Weekly UPI Payouts
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Screen Directory -->
+  <section class="section container" id="screens">
+    <div class="section-head">
+      <span class="section-tag">Interactive Directory</span>
+      <h2 class="section-title">All 25+ Production App Screens</h2>
+      <p class="section-desc">Search through every screen in the app to review customer experience and business value.</p>
+    </div>
+
+    <div class="table-wrapper">
+      <div class="search-bar-row">
+        <span style="font-size: 1.2rem;">🔍</span>
+        <input type="text" id="routeSearch" class="search-text-input" placeholder="Search by screen name, user role, or customer experience...">
+      </div>
+
+      <table class="screen-table">
+        <thead>
+          <tr>
+            <th>Screen Name</th>
+            <th>Primary User</th>
+            <th>Feature Module</th>
+            <th>Customer Experience & Value</th>
+          </tr>
+        </thead>
+        <tbody id="routeTableBody">
+          <tr>
+            <td><strong>Home Discovery Feed</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Home & Discovery</td>
+            <td>Hero promotions, 1-tap treat reordering, daily pet wellness tips, and streak coin rewards.</td>
+          </tr>
+          <tr>
+            <td><strong>Nutrition Catalog Store</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>E-Commerce</td>
+            <td>Browse wholesome treats, chews, and air-dried food with instant filters for dogs and cats.</td>
+          </tr>
+          <tr>
+            <td><strong>Product Detail & Nutrition</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>E-Commerce</td>
+            <td>High-res photo gallery, 100% natural ingredient breakdown, and single purchase vs auto-delivery choices.</td>
+          </tr>
+          <tr>
+            <td><strong>Smart Shopping Cart</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Checkout & Orders</td>
+            <td>Instant cart with coupon discount engine, free delivery progress tracker, and order summary.</td>
+          </tr>
+          <tr>
+            <td><strong>Auto-Delivery Subscriptions</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>E-Commerce</td>
+            <td>Manage recurring monthly/weekly box deliveries, change intervals, or pause deliveries anytime.</td>
+          </tr>
+          <tr>
+            <td><strong>Pet Care & Services Hub</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Care Services</td>
+            <td>One central screen for SOS Blood Bank, Local Pet Services, and Nearby Veterinary Clinics.</td>
+          </tr>
+          <tr>
+            <td><strong>Pet Services Marketplace</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Services Marketplace</td>
+            <td>Browse walkers, sitters, groomers, and trainers filtered by city with starting rates and ratings.</td>
+          </tr>
+          <tr>
+            <td><strong>Provider Profile & Reviews</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Services Marketplace</td>
+            <td>View provider bio, verified badges, past pet parent reviews, service pricing, and photo gallery.</td>
+          </tr>
+          <tr>
+            <td><strong>Instant Service Booking</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Services Marketplace</td>
+            <td>Select service type, choose saved pet, pick date & time slot, and view clear price breakdown.</td>
+          </tr>
+          <tr>
+            <td><strong>Booking Celebration & Summary</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Services Marketplace</td>
+            <td>Animated confirmation screen with booking reference, what happens next, and direct provider chat.</td>
+          </tr>
+          <tr>
+            <td><strong>Provider Partner Dashboard</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Management</td>
+            <td>Online/Offline toggle, weekly earnings dashboard, incoming requests manager, and service rates.</td>
+          </tr>
+          <tr>
+            <td><strong>Become a Provider Landing</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Onboarding</td>
+            <td>Earnings breakdown, benefits of partnering with Doggy Ji, and 3-step registration overview.</td>
+          </tr>
+          <tr>
+            <td><strong>Registration: Step 1 Basic Info</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Onboarding</td>
+            <td>Full name, city of operation, services offered (walks, sitting), and years of pet experience.</td>
+          </tr>
+          <tr>
+            <td><strong>Registration: Step 2 Story & Bio</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Onboarding</td>
+            <td>Personal pet experience story, background bio, and profile photo upload.</td>
+          </tr>
+          <tr>
+            <td><strong>Registration: Step 3 Pricing & Rates</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Onboarding</td>
+            <td>Set custom pricing per service, specify max pets handled per session, and home visit options.</td>
+          </tr>
+          <tr>
+            <td><strong>Registration: Step 4 Verification Docs</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Onboarding</td>
+            <td>Government ID & masked Aadhaar entry to ensure safe, trusted professionals for pet parents.</td>
+          </tr>
+          <tr>
+            <td><strong>Registration: Step 5 Pet Safety Quiz</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Onboarding</td>
+            <td>5-question Pet Safety & First-Aid Quiz with 80% passing gate to certify pet safety knowledge.</td>
+          </tr>
+          <tr>
+            <td><strong>Application Received & Next Steps</strong></td>
+            <td><span class="role-badge role-provider">Care Provider</span></td>
+            <td>Partner Onboarding</td>
+            <td>Approval timeline explainer, review status, and direct launcher to demo the Provider Dashboard.</td>
+          </tr>
+          <tr>
+            <td><strong>SOS Blood Bank Hub</strong></td>
+            <td><span class="role-badge role-parent">Emergency</span></td>
+            <td>Emergency Care</td>
+            <td>Urgent emergency alert banner, donor search by city and blood type (DEA 1.1, etc.).</td>
+          </tr>
+          <tr>
+            <td><strong>Volunteer Donor Registration</strong></td>
+            <td><span class="role-badge role-parent">Donor Parent</span></td>
+            <td>Emergency Care</td>
+            <td>Register healthy dogs/cats as emergency donors with eligibility checklist to save lives.</td>
+          </tr>
+          <tr>
+            <td><strong>Emergency Broadcast Request</strong></td>
+            <td><span class="role-badge role-parent">Emergency</span></td>
+            <td>Emergency Care</td>
+            <td>Submit urgent transfusion request with hospital name, attending doctor, and urgency level.</td>
+          </tr>
+          <tr>
+            <td><strong>Neighborhood Pet Match</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Community Social</td>
+            <td>Swipe discovery cards to find compatible local dogs and cats for park playdates and walks.</td>
+          </tr>
+          <tr>
+            <td><strong>In-App Messaging & Chat</strong></td>
+            <td><span class="role-badge role-both">Both Roles</span></td>
+            <td>Community Social</td>
+            <td>Real-time messaging between pet parents and service providers to coordinate walks and care.</td>
+          </tr>
+          <tr>
+            <td><strong>Paw Points Loyalty Club</strong></td>
+            <td><span class="role-badge role-parent">Pet Parent</span></td>
+            <td>Gamification</td>
+            <td>Streak tracker, daily check-in coins, milestone rewards, and treat redemption catalog.</td>
+          </tr>
+          <tr>
+            <td><strong>My Account & Dual Mode Switcher</strong></td>
+            <td><span class="role-badge role-both">Both Roles</span></td>
+            <td>Profile & Settings</td>
+            <td>Order history, subscriptions, dark mode toggle, and instant switch between Parent & Provider modes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer container">
+    <div class="footer-logo">
+      <span>🐶</span>
+      <span>Doggy Ji Companion Platform</span>
+    </div>
+    <p>Comprehensive Feature Showcase & Interactive Simulator • Built for Doggy Ji</p>
+    <p style="margin-top: 0.4rem; font-size: 0.8rem; color: var(--text-dim);">
+      Cross-Platform Mobile Application • Android & iOS • Ready for Production
+    </p>
+  </footer>
+
+  <!-- Custom Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
