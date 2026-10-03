@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" ng-app="doggyji" ng-controller="PageCtrl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete your Doggy Ji account</title>
+<meta name="description" content="Delete your Doggy Ji app account and data: sign in here, use the app, or send us a request. What is deleted and what we keep.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/app.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="../"><img src="../assets/logo.png" alt="" width="36" height="36"> Doggy Ji</a>
+      <ul style="display:flex">
+        <li><a class="link" href="../">Home</a></li>
+        <li><a class="link" href="../privacy/">Privacy policy</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main class="doc" ng-controller="DeleteCtrl"><div class="wrap"><div class="sheet">
+
+  <h1>Delete your Doggy Ji account</h1>
+  <p>This page is for the <strong>Doggy Ji app</strong> (developer: {{site.company}}). You can delete your account and its data right here, or in the app.</p>
+
+  <div class="notice warn">
+    <p><strong>Deleting is permanent.</strong> Your profile, pets, chats and bookings cannot be brought back afterwards.</p>
+  </div>
+
+  <h2>Option 1: sign in here and delete</h2>
+
+  <!-- Step 1: sign in -->
+  <form class="box" name="loginForm" ng-submit="signIn(loginForm)" novalidate ng-show="step === 'signin'">
+    <p style="margin:0 0 6px">Sign in with the email and password of your Doggy Ji account. We don't keep your password or sign you in on this device.</p>
+    <label class="f" for="lemail">Email</label>
+    <input class="t" id="lemail" name="email" type="email" ng-model="login.email" required autocomplete="email">
+    <div class="err" ng-show="loginForm.$submitted && loginForm.email.$invalid">Enter the email you signed up with.</div>
+    <label class="f" for="lpass">Password</label>
+    <input class="t" id="lpass" name="password" type="password" ng-model="login.password" required autocomplete="current-password">
+    <div class="err" ng-show="loginForm.$submitted && loginForm.password.$invalid">Enter your password.</div>
+    <div class="err" ng-show="error" role="alert">{{error}}</div>
+    <p style="margin:16px 0 0"><button class="btn primary" type="submit" ng-disabled="busy">{{busy ? 'Signing in…' : 'Sign in'}}</button></p>
+    <p style="margin:14px 0 0;font-size:.88rem">Forgot your password? Open the app and tap <strong>Forgot password</strong> on the sign-in screen. Signed up with Google? You have no password, so use the app (Option 2) or the email request (Option 3).</p>
+  </form>
+
+  <!-- Step 2: confirm -->
+  <div class="box" ng-show="step === 'confirm'">
+    <p style="margin:0 0 6px">Signed in as <strong>{{user.email}}</strong>.</p>
+    <div class="notice warn" style="margin-top:12px">
+      <p>This permanently deletes your profile, pets, matches, chats, bookings and login. It cannot be undone.</p>
+    </div>
+    <label class="f" for="phrase">Type <strong>DELETE</strong> to confirm</label>
+    <input class="t" id="phrase" type="text" ng-model="phrase" autocomplete="off" autocapitalize="characters" placeholder="DELETE">
+    <div class="err" ng-show="error" role="alert">{{error}}</div>
+    <p style="margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn danger" type="button" ng-click="deleteNow()" ng-disabled="!canDelete()">{{busy ? 'Deleting…' : 'Delete my account'}}</button>
+      <button class="btn outline" type="button" ng-click="cancel()" ng-disabled="busy">Cancel</button>
+    </p>
+  </div>
+
+  <!-- Step 3: done -->
+  <div class="notice ok" ng-show="step === 'done'">
+    <p><strong>Your Doggy Ji account has been deleted.</strong></p>
+    <p>Your data has been erased, except the records described below, which are kept without your name. If you still have the app, you can uninstall it.</p>
+  </div>
+
+  <h2>Option 2: delete it in the app</h2>
+  <ol>
+    <li>Open the Doggy Ji app and sign in.</li>
+    <li>Tap <strong>Profile</strong> in the bottom menu.</li>
+    <li>Scroll to the bottom and tap <strong>Delete Account</strong>.</li>
+    <li>Read the warning, type <strong>DELETE</strong> in the box, then tap <strong>Delete</strong>.</li>
+  </ol>
+
+  <h2>Option 3: ask us to delete it</h2>
+  <p>Can't sign in anywhere? Send us a request. We will check that it comes from the account's owner (we may ask you to reply from the same email address), then delete the account. We reply within 30 days.</p>
+
+  <form class="box" name="delForm" ng-submit="submit(delForm)" novalidate>
+    <label class="f" for="email">Email address of your Doggy Ji account *</label>
+    <input class="t" id="email" name="email" type="email" ng-model="form.email" required autocomplete="email" placeholder="you@example.com">
+    <div class="err" ng-show="delForm.$submitted && delForm.email.$invalid">Please enter the email you signed up with.</div>
+
+    <label class="f" for="username">Username in the app (optional)</label>
+    <input class="t" id="username" name="username" type="text" ng-model="form.username" autocomplete="username" placeholder="your_username">
+
+    <label class="f" for="reason">Why are you leaving? (optional)</label>
+    <select class="t" id="reason" ng-model="form.reason" ng-options="r for r in reasons">
+      <option value="">Choose one…</option>
+    </select>
+
+    <label class="f" for="note">Anything else we should know? (optional)</label>
+    <textarea class="t" id="note" rows="3" ng-model="form.note"></textarea>
+
+    <label class="check">
+      <input type="checkbox" ng-model="form.confirm">
+      <span>I understand that deleting my account is permanent and cannot be undone.</span>
+    </label>
+    <div class="err" ng-show="delForm.$submitted && !form.confirm">Please tick the box to confirm.</div>
+
+    <button class="btn primary" type="submit">Prepare my deletion request</button>
+    <p style="margin:14px 0 0;font-size:.88rem" ng-hide="sent">This opens an email to {{site.email}} with your details filled in. Press send in your email app to finish.</p>
+    <div class="notice" ng-show="sent" style="margin-bottom:0">
+      <p>Your email app should have opened. Press <strong>send</strong> to complete the request. If nothing opened, email <a ng-href="mailto:{{site.email}}">{{site.email}}</a> from the address on your account and ask us to delete your Doggy Ji account.</p>
+    </div>
+  </form>
+
+  <h2>What happens to your data</h2>
+  <table class="k">
+    <thead><tr><th>Deleted</th><th>Kept, without your name</th></tr></thead>
+    <tbody><tr>
+      <td>
+        <ul style="margin:0">
+          <li>Your profile and login</li>
+          <li>Your pets and their photos</li>
+          <li>Pet Match listings and likes</li>
+          <li>Chats, messages and the Doggy Ji chat</li>
+          <li>Friends and notifications</li>
+          <li>Blood donor registrations</li>
+          <li>Bookings and reviews you wrote</li>
+          <li>Service provider profile and documents</li>
+        </ul>
+      </td>
+      <td>
+        <ul style="margin:0">
+          <li><strong>Orders</strong>: sales records held by our store and for tax, unlinked from your app account</li>
+          <li><strong>Past blood requests</strong>: kept as an emergency record, with your identity removed</li>
+          <li><strong>Reports you filed</strong>: kept for moderation, without naming you</li>
+        </ul>
+      </td>
+    </tr></tbody>
+  </table>
+  <p style="font-size:.92rem">Chat images are removed automatically after 24 hours in any case. For more detail see our <a href="../privacy/">privacy policy</a>.</p>
+
+  <h2>The Doggy Ji shop (doggyji.com)</h2>
+  <p>Orders and shop accounts are held by our store, separately from the app. To delete shop data, email <a ng-href="mailto:{{site.email}}">{{site.email}}</a> or call <a ng-href="tel:{{site.phoneHref}}">{{site.phone}}</a>.</p>
+
+  <h2>Contact</h2>
+  <p>Grievance Officer, {{site.company}} (Doggy Ji)<br>
+  Email: <a ng-href="mailto:{{site.email}}">{{site.email}}</a><br>
+  Phone: {{site.phone}}<br>
+  {{site.address}}</p>
+
+</div></div></main>
+
+<footer>
+  <div class="wrap">
+    <div class="legal" style="border:0;margin:0;padding:0">© {{site.year}} {{site.company}}. <a href="../">Doggy Ji</a> · <a href="../privacy/">Privacy policy</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
