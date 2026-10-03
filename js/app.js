@@ -113,7 +113,8 @@
   // admin portal ship). Access is decided by the signed-in user's own token, not by this key.
   app.constant('BACKEND', {
     url: 'https://jyzyvwdwcrgbtxfqcscg.supabase.co',
-    key: 'sb_publishable_089uZjQk0lF9GI7Nfb9mFA_QhgM4kur'
+    key: 'sb_publishable_089uZjQk0lF9GI7Nfb9mFA_QhgM4kur',
+    googleWeb: true
   });
 
   // Delete-account page.
@@ -126,7 +127,7 @@
     function client() {
       if (!sb && $window.supabase && $window.supabase.createClient) {
         sb = $window.supabase.createClient(BACKEND.url, BACKEND.key, {
-          auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+          auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: true, flowType: 'implicit' }
         });
       }
       return sb;
@@ -138,7 +139,63 @@
     $scope.busy = false;
     $scope.error = '';
     $scope.user = null;
-    $scope.mailMode = false;
+    $scope.profile = null;
+    // Google sign-in needs this page's address in Supabase Auth > URL Configuration > Redirect URLs.
+    $scope.googleEnabled = BACKEND.googleWeb;
+
+    // Who is signed in: name, username and email from the profile, so the person can see which
+    // account they are about to delete.
+    function loadProfile(c, user) {
+      var meta = user.user_metadata || {};
+      $scope.profile = { name: meta.full_name || meta.name || '', username: '', email: user.email || '', avatar: meta.avatar_url || meta.picture || '' };
+      return $q.when(c.from('profiles').select('full_name, username, avatar_url').or('id.eq.' + user.id + ',auth_user_id.eq.' + user.id).limit(1).maybeSingle())
+        .then(function (r) {
+          var row = r && r.data;
+          if (row) {
+            $scope.profile.name = row.full_name || $scope.profile.name;
+            $scope.profile.username = row.username || '';
+            $scope.profile.avatar = row.avatar_url || $scope.profile.avatar;
+          }
+        })
+        .catch(function () { /* the account still shows by email */ });
+    }
+    $scope.initial = function () {
+      var p = $scope.profile || {};
+      return ((p.name || p.username || p.email || '?').charAt(0) || '?').toUpperCase();
+    };
+
+    function enterConfirm(c, user) {
+      $scope.user = user;
+      return loadProfile(c, user).then(function () { $scope.step = 'confirm'; });
+    }
+
+    // Coming back from Google: the session is in the address, read in memory by the client.
+    (function () {
+      var c = client();
+      if (!c) { return; }
+      var hash = $window.location.hash || '';
+      var cameBack = /access_token=|error_description=/.test(hash);
+      if (/error_description=/.test(hash)) {
+        $scope.error = 'Google sign-in did not complete. Try again, or use the email request below.';
+      }
+      if (cameBack) {
+        $q.when(c.auth.getSession()).then(function (r) {
+          if (r.data && r.data.session) { return enterConfirm(c, r.data.session.user); }
+        });
+      }
+    })();
+
+    $scope.googleSignIn = function () {
+      var c = client();
+      if (!c || $scope.busy) { return; }
+      $scope.busy = true; $scope.error = '';
+      $q.when(c.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: $window.location.origin + $window.location.pathname }
+      })).then(function (r) {
+        if (r && r.error) { $scope.error = 'Could not start Google sign-in. Try again, or use the email request below.'; $scope.busy = false; }
+      }).catch(function () { $scope.error = 'Could not reach the server. Check your connection.'; $scope.busy = false; });
+    };
 
     $scope.signIn = function (form) {
       form.$setSubmitted();
@@ -154,9 +211,8 @@
               : 'Could not sign in. Please try again.';
             return;
           }
-          $scope.user = r.data.user;
           $scope.login.password = '';
-          $scope.step = 'confirm';
+          return enterConfirm(c, r.data.user);
         })
         .catch(function () { $scope.error = 'Could not reach the server. Check your connection, or use the email request below.'; })
         .finally(function () { $scope.busy = false; });
@@ -194,7 +250,7 @@
 
     $scope.cancel = function () {
       if (sb) { sb.auth.signOut({ scope: 'local' }); }
-      $scope.step = 'signin'; $scope.user = null; $scope.phrase = ''; $scope.error = '';
+      $scope.step = 'signin'; $scope.user = null; $scope.profile = null; $scope.phrase = ''; $scope.error = '';
     };
 
     // Fallback: an email to us, for people who cannot sign in here.

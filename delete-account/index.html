@@ -42,7 +42,7 @@
 
   <!-- Step 1: sign in -->
   <form class="box" name="loginForm" ng-submit="signIn(loginForm)" novalidate ng-show="step === 'signin'">
-    <p style="margin:0 0 6px">Sign in with the email and password of your Doggy Ji account. We don't keep your password or sign you in on this device.</p>
+    <p style="margin:0 0 6px">Sign in with the email and password of your Doggy Ji account, or with Google. We don't keep your password or sign you in on this device.</p>
     <label class="f" for="lemail">Email</label>
     <input class="t" id="lemail" name="email" type="email" ng-model="login.email" required autocomplete="email">
     <div class="err" ng-show="loginForm.$submitted && loginForm.email.$invalid">Enter the email you signed up with.</div>
@@ -51,12 +51,25 @@
     <div class="err" ng-show="loginForm.$submitted && loginForm.password.$invalid">Enter your password.</div>
     <div class="err" ng-show="error" role="alert">{{error}}</div>
     <p style="margin:16px 0 0"><button class="btn primary" type="submit" ng-disabled="busy">{{busy ? 'Signing in…' : 'Sign in'}}</button></p>
-    <p style="margin:14px 0 0;font-size:.88rem">Forgot your password? Open the app and tap <strong>Forgot password</strong> on the sign-in screen. Signed up with Google? You have no password, so use the app (Option 2) or the email request (Option 3).</p>
+    <div ng-if="googleEnabled">
+      <p style="margin:18px 0 12px;text-align:center;color:var(--muted);font-size:.85rem">or, if you signed up with Google</p>
+      <button class="btn outline" type="button" ng-click="googleSignIn()" ng-disabled="busy" style="width:100%;justify-content:center">Continue with Google</button>
+    </div>
+    <p style="margin:14px 0 0;font-size:.88rem">Forgot your password? Open the app and tap <strong>Forgot password</strong> on the sign-in screen. Can't sign in at all? Use the app (Option 2) or the email request (Option 3).</p>
   </form>
 
   <!-- Step 2: confirm -->
   <div class="box" ng-show="step === 'confirm'">
-    <p style="margin:0 0 6px">Signed in as <strong>{{user.email}}</strong>.</p>
+    <p style="margin:0 0 10px">You are about to delete this account:</p>
+    <div class="who">
+      <img ng-if="profile.avatar" ng-src="{{profile.avatar}}" alt="" referrerpolicy="no-referrer">
+      <span class="av" ng-if="!profile.avatar">{{initial()}}</span>
+      <div>
+        <strong>{{profile.name || 'Doggy Ji user'}}</strong>
+        <div ng-if="profile.username" style="color:var(--teal-btn);font-weight:700">@{{profile.username}}</div>
+        <div style="color:var(--muted);font-size:.9rem">{{profile.email}}</div>
+      </div>
+    </div>
     <div class="notice warn" style="margin-top:12px">
       <p>This permanently deletes your profile, pets, matches, chats, bookings and login. It cannot be undone.</p>
     </div>

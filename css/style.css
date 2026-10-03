@@ -174,6 +174,9 @@ footer .legal { border-top: 1px solid #1e293b; margin-top: 28px; padding-top: 18
 .notice p { margin: 0; color: var(--navy); }
 .notice p + p { margin-top: .6em; }
 .box { background: var(--canvas); border: 1px solid var(--line); border-radius: 20px; padding: 24px; margin: 22px 0; }
+.who { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+.who img, .who .av { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+.who .av { background: rgba(35, 193, 195, .18); color: var(--teal-btn); display: grid; place-items: center; font: 900 1.6rem 'Nunito', sans-serif; }
 label.f { display: block; font-weight: 700; margin: 16px 0 6px; font-size: .9rem; color: var(--navy); }
 input.t, select.t, textarea.t { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; color: var(--navy); font: inherit; }
 input.t:focus, select.t:focus, textarea.t:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
